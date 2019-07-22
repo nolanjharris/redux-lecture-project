@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
+import store, { UPDATE_USERNAME } from './redux/store';
 
 export default class Login extends Component {
     constructor() {
@@ -16,6 +17,11 @@ export default class Login extends Component {
         this.setState({
             username: e.target.value
         })
+        const action = {
+            type: UPDATE_USERNAME,
+            payload: e.target.value
+        }
+        store.dispatch(action);
     }
 
     handlePasswordChange(e) {
@@ -25,10 +31,10 @@ export default class Login extends Component {
     }
 
     render() {
-        return(
+        return (
             <div>
-                <input placeholder='Username' onChange={this.handleUsernameChange}/>
-                <input placeholder='Password' onChange={this.handlePasswordChange}/>
+                <input placeholder='Username' onChange={this.handleUsernameChange} />
+                <input placeholder='Password' onChange={this.handlePasswordChange} />
                 <Link to='/profile'>Log in</Link>
             </div>
         )
